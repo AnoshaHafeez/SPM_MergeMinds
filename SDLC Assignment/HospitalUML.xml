@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36" version="28.2.1">
+  <diagram id="hospital-uml" name="Hospital Patient Management UML">
+    <mxGraphModel dx="1209" dy="642" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="patient" value="Patient&#xa;- patient_id: PK int&#xa;- name: string&#xa;- dob: date&#xa;- phone: string&#xa;- email: string&#xa;- password_hash: string&#xa;- insurance_info: string&#xa;---------------------------&#xa;+ signup()&#xa;+ login()&#xa;+ updateProfile()&#xa;+ viewAppointments()" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="140" y="40" width="220" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="doctor" value="Doctor&#xa;- doctor_id: PK int&#xa;- name: string&#xa;- specialization: string&#xa;- working_hours: string&#xa;---------------------------&#xa;+ addSchedule()&#xa;+ viewAppointments()&#xa;+ updateMedicalRecord()" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="430" y="60" width="220" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment" value="Appointment&lt;br&gt;- appointment_id: PK int&lt;br&gt;- patient_id: FK int&lt;br&gt;- doctor_id: FK int&lt;br&gt;-time: datetime&lt;br&gt;- status: string&lt;br&gt;---------------------------&lt;br&gt;+ bookAppointment()&lt;br&gt;+ cancelAppointment()&lt;br&gt;+ rescheduleAppointment()" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="240" y="280" width="240" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="record" value="MedicalRecord&#xa;- record_id: PK int&#xa;- patient_id: FK int&#xa;- doctor_id: FK int&#xa;- appointment_id: FK int&#xa;- notes: text&#xa;- diagnosis: string&#xa;- prescription: string&#xa;---------------------------&#xa;+ addRecord()&#xa;+ updateRecord()&#xa;+ viewRecord()" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="520" y="260" width="240" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="billing" value="Billing&#xa;- invoice_id: PK int&#xa;- patient_id: FK int&#xa;- appointment_id: FK int&#xa;- total_amount: double&#xa;- status: string&#xa;- created_at: datetime&#xa;---------------------------&#xa;+ createInvoice()&#xa;+ updateStatus()&#xa;+ viewInvoice()" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="120" y="500" width="240" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="rel1" style="endArrow=block;endFill=1;" parent="1" source="patient" target="appointment" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel2" style="endArrow=block;endFill=1;" parent="1" source="doctor" target="appointment" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel3" style="endArrow=block;endFill=1;" parent="1" source="appointment" target="record" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel4" style="endArrow=block;endFill=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="167.23042553191488" y="240" as="sourcePoint" />
+            <mxPoint x="172.76234042553176" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
