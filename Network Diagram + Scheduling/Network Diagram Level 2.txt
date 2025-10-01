@@ -1,0 +1,93 @@
+@startuml
+top to bottom direction
+skinparam dpi 150
+skinparam shadowing true
+skinparam class {
+  FontSize 12
+  FontName Arial
+  RoundCorner 15
+  BorderThickness 2
+  BackgroundColor<<Critical>> #ffe0e0
+  BorderColor<<Critical>> #ff0000
+  BackgroundColor<<NonCritical>> #f9f9f9
+  BorderColor<<NonCritical>> #666666
+}
+title "<b>Finverse Project</b>\nLevel 2 WBS – CPM AoN Network"
+
+class P <<Critical>> {
+  ES=0 | DUR=7 | EF=7
+  --
+  <b>Planning & Analysis</b>
+  --
+  LS=0 | FLOAT=0 | LF=7
+}
+class D <<Critical>> {
+  ES=7 | DUR=6 | EF=13
+  --
+  <b>System Design</b>
+  --
+  LS=7 | FLOAT=0 | LF=13
+}
+class S <<Critical>> {
+  ES=13 | DUR=2 | EF=15
+  --
+  <b>Env Setup</b>
+  --
+  LS=13 | FLOAT=0 | LF=15
+}
+class C <<Critical>> {
+  ES=15 | DUR=25 | EF=40
+  --
+  <b>Core Development</b>
+  --
+  LS=15 | FLOAT=0 | LF=40
+}
+class Pay <<NonCritical>> {
+  ES=40 | DUR=15 | EF=55
+  --
+  <b>Payments & Subs</b>
+  --
+  LS=43 | FLOAT=3 | LF=58
+}
+class M <<NonCritical>> {
+  ES=15 | DUR=18 | EF=33
+  --
+  <b>Market & Notify</b>
+  --
+  LS=40 | FLOAT=7 | LF=47
+}
+class QA <<Critical>> {
+  ES=40 | DUR=27 | EF=67
+  --
+  <b>Testing & QA</b>
+  --
+  LS=40 | FLOAT=0 | LF=67
+}
+class DEP <<Critical>> {
+  ES=67 | DUR=7 | EF=74
+  --
+  <b>Deployment</b>
+  --
+  LS=67 | FLOAT=0 | LF=74
+}
+
+' ---- Critical Path ----
+P -[thickness=3,#red]-> D : FS
+D -[thickness=3,#red]-> S : FS
+S -[thickness=3,#red]-> C : FS
+C -[thickness=3,#red]-> QA : FS
+QA -[thickness=3,#red]-> DEP : FS
+
+' ---- Non-Critical Paths ----
+C -[dashed,#888]-> Pay : FS
+C -[dashed,#888]-> M : FS
+Pay -[dashed,#888]-> QA : FS
+M -[dashed,#888]-> QA : FS
+
+legend left
+<b>Legend</b>
+FS = Finish→Start  
+Critical path = red boxes & thick arrows  
+Non-critical = gray boxes & dashed arrows  
+endlegend
+@enduml

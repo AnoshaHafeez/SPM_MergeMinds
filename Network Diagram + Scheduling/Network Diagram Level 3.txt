@@ -1,0 +1,253 @@
+@startuml
+top to bottom direction
+skinparam dpi 150
+skinparam shadowing true
+skinparam class {
+  FontSize 12
+  FontName Arial
+  RoundCorner 15
+  BorderThickness 2
+  BackgroundColor<<Critical>> #ffe0e0
+  BorderColor<<Critical>> #ff0000
+  BackgroundColor<<NonCritical>> #f9f9f9
+  BorderColor<<NonCritical>> #666666
+}
+
+title "<b>Finverse Project</b>\nLevel 3 WBS – CPM AoN Network"
+
+' ---- Activities ----
+class A1 <<Critical>> {
+  ES=0 | DUR=5 | EF=5
+  --
+  <b>Reqs</b>
+  --
+  LS=0 | FLOAT=0 | LF=5
+}
+
+class A2 <<NonCritical>> {
+  ES=5 | DUR=2 | EF=7
+  --
+  <b>WBS</b>
+  --
+  LS=35 | FLOAT=30 | LF=37
+}
+
+class D1 <<Critical>> {
+  ES=5 | DUR=3 | EF=8
+  --
+  <b>Arch</b>
+  --
+  LS=5 | FLOAT=0 | LF=8
+}
+
+class D2 <<Critical>> {
+  ES=8 | DUR=3 | EF=11
+  --
+  <b>DB Schema</b>
+  --
+  LS=8 | FLOAT=0 | LF=11
+}
+
+class I1 <<NonCritical>> {
+  ES=5 | DUR=2 | EF=7
+  --
+  <b>Repo</b>
+  --
+  LS=35 | FLOAT=30 | LF=37
+}
+
+class B1 <<Critical>> {
+  ES=11 | DUR=8 | EF=19
+  --
+  <b>Auth</b>
+  --
+  LS=11 | FLOAT=0 | LF=19
+}
+
+class B2 <<NonCritical>> {
+  ES=19 | DUR=5 | EF=24
+  --
+  <b>Profiles</b>
+  --
+  LS=40 | FLOAT=21 | LF=45
+}
+
+class B3 <<Critical>> {
+  ES=19 | DUR=15 | EF=34
+  --
+  <b>Signals API</b>
+  --
+  LS=19 | FLOAT=0 | LF=34
+}
+
+class B4 <<Critical>> {
+  ES=34 | DUR=8 | EF=42
+  --
+  <b>Targets</b>
+  --
+  LS=34 | FLOAT=0 | LF=42
+}
+
+class B5 <<NonCritical>> {
+  ES=34 | DUR=5 | EF=39
+  --
+  <b>Reactions</b>
+  --
+  LS=66 | FLOAT=32 | LF=71
+}
+
+class B6 <<NonCritical>> {
+  ES=34 | DUR=4 | EF=38
+  --
+  <b>Watchlist</b>
+  --
+  LS=71 | FLOAT=37 | LF=75
+}
+
+class P1 <<NonCritical>> {
+  ES=19 | DUR=5 | EF=24
+  --
+  <b>Plans</b>
+  --
+  LS=40 | FLOAT=21 | LF=45
+}
+
+class P2 <<NonCritical>> {
+  ES=24 | DUR=10 | EF=34
+  --
+  <b>Checkout</b>
+  --
+  LS=45 | FLOAT=21 | LF=55
+}
+
+class M1 <<NonCritical>> {
+  ES=11 | DUR=10 | EF=21
+  --
+  <b>Market</b>
+  --
+  LS=55 | FLOAT=34 | LF=65
+}
+
+class N1 <<NonCritical>> {
+  ES=34 | DUR=8 | EF=42
+  --
+  <b>Notify</b>
+  --
+  LS=55 | FLOAT=21 | LF=63
+}
+
+class L1 <<Critical>> {
+  ES=42 | DUR=6 | EF=48
+  --
+  <b>Leaderboard</b>
+  --
+  LS=42 | FLOAT=0 | LF=48
+}
+
+class Q1 <<Critical>> {
+  ES=48 | DUR=12 | EF=60
+  --
+  <b>Unit Tests</b>
+  --
+  LS=48 | FLOAT=0 | LF=60
+}
+
+class Q2 <<Critical>> {
+  ES=60 | DUR=8 | EF=68
+  --
+  <b>Integration</b>
+  --
+  LS=60 | FLOAT=0 | LF=68
+}
+
+class S1 <<NonCritical>> {
+  ES=24 | DUR=7 | EF=31
+  --
+  <b>Security</b>
+  --
+  LS=55 | FLOAT=31 | LF=62
+}
+
+class DPL1 <<Critical>> {
+  ES=68 | DUR=3 | EF=71
+  --
+  <b>Staging</b>
+  --
+  LS=68 | FLOAT=0 | LF=71
+}
+
+class DPL2 <<Critical>> {
+  ES=71 | DUR=2 | EF=73
+  --
+  <b>Prod</b>
+  --
+  LS=71 | FLOAT=0 | LF=73
+}
+
+class X1 <<Critical>> {
+  ES=73 | DUR=2 | EF=75
+  --
+  <b>Decom</b>
+  --
+  LS=73 | FLOAT=0 | LF=75
+}
+
+' ---- Critical Path arrows ----
+A1 -[thickness=3,#red]-> D1 : FS
+D1 -[thickness=3,#red]-> D2 : FS
+D2 -[thickness=3,#red]-> B1 : FS
+B1 -[thickness=3,#red]-> B3 : FS
+B3 -[thickness=3,#red]-> B4 : FS
+B4 -[thickness=3,#red]-> L1 : FS
+L1 -[thickness=3,#red]-> Q1 : FS
+Q1 -[thickness=3,#red]-> Q2 : FS
+Q2 -[thickness=3,#red]-> DPL1 : FS
+DPL1 -[thickness=3,#red]-> DPL2 : FS
+DPL2 -[thickness=3,#red]-> X1 : FS
+
+' ---- Non-critical arrows ----
+A1 -[dashed,#888]-> A2 : FS
+A1 -[dashed,#888]-> I1 : FS
+I1 -[dashed,#888]-> B1 : FS
+B1 -[dashed,#888]-> B2 : FS
+B1 -[dashed,#888]-> P1 : FS
+P1 -[dashed,#888]-> P2 : FS
+D2 -[dashed,#888]-> M1 : FS
+I1 -[dashed,#888]-> M1 : FS
+B3 -[dashed,#888]-> B5 : FS
+B3 -[dashed,#888]-> B6 : FS
+B3 -[dashed,#888]-> N1 : FS
+P2 -[dashed,#888]-> N1 : FS
+B1 -[dashed,#888]-> Q1 : FS
+B3 -[dashed,#888]-> Q1 : FS
+M1 -[dashed,#888]-> Q1 : FS
+N1 -[dashed,#888]-> Q1 : FS
+B1 -[dashed,#888]-> S1 : FS
+B3 -[dashed,#888]-> S1 : FS
+P2 -[dashed,#888]-> S1 : FS
+
+legend left
+<b>Legend</b>
+Reqs = Requirements  
+Arch = Backend Architecture  
+DB Schema = Database Schema  
+Repo = Repo Setup  
+Auth = Authentication Service  
+Profiles = Trader Profiles  
+Signals API = Signal Posting Module  
+Targets = Targets & Outcomes  
+Reactions = Reactions & Comments  
+Watchlist = User Watchlist  
+Plans = Subscription Plans  
+Checkout = Checkout + Payment Webhook  
+Market = Market Data Ingest  
+Notify = Notifications  
+Leaderboard = Leaderboard Job  
+Unit Tests = Module Unit Tests  
+Integration = Integration/E2E Tests  
+Security = Security Hardening  
+Staging = Staging Deployment  
+Prod = Production Release  
+Decom = Legacy Decommission  
+endlegend
+@enduml
